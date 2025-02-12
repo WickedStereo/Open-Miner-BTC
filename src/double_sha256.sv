@@ -35,7 +35,7 @@ module double_sha256 (
     // First SHA-256 round: Process the full block header.
     // The multi-block padder will produce 2 blocks since 640 bits require padding
     // into 1024 bits (2 * 512).
-    sha256pipetop #(
+    top_sha256_pipe #(
         .MSG_BITS(640),
         .PADDED_BITS(512)
     ) sha256round1 (
@@ -48,7 +48,7 @@ module double_sha256 (
     
     // Second SHA-256 round: Process the 256-bit inner hash.
     // The inner hash is padded as a 256-bit message, which fits in one block.
-    sha256pipetop #(
+    top_sha256_pipe #(
         .MSG_BITS(256),
         .PADDED_BITS(512)
     ) sha256round2 (
